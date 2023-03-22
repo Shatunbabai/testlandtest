@@ -173,3 +173,39 @@
 
 
 })(window.jQuery);
+let arrayItems = Array.from(
+    document.querySelectorAll(".features-item")
+  );
+  let arrayResponsesActive = [];
+  arrayItems.forEach((item) => item.addEventListener("click", toggleMenu));
+  function toggleMenu(event) {
+    if (event.currentTarget.lastElementChild.style.display === "block") {
+    event.currentTarget.lastElementChild.style.display = 'none'
+    event.currentTarget.classList.remove("active");
+    arrayResponsesActive.shift(event.currentTarget);
+    
+    
+  }
+  else  {
+    event.currentTarget.classList.add("active");
+    event.currentTarget.lastElementChild.style.display = 'block'
+    arrayResponsesActive.push(event.currentTarget);
+   
+    
+  }
+}
+for (let i = 0; i < arrayItems.length; i++) {
+    arrayItems[i].addEventListener("click", function () {
+      if (
+        arrayItems[i].classList.contains("active") &&
+        arrayResponsesActive.length === 2
+      ) {
+        arrayResponsesActive[0].classList.remove("active");
+        arrayResponsesActive[0].lastElementChild.style.display = "none";
+        arrayResponsesActive.shift();
+        
+      }
+    });
+    
+    
+  }
